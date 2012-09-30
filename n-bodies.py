@@ -2,6 +2,7 @@ import pygame
 import random
 import math
 
+number_of_particles = 2
 background_colour = (255,255,255)
 velo_line_colour = (255,0,0)
 force_line_colour = (100,200,200)
@@ -90,7 +91,6 @@ class Particle():
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('N-Bodies Interacting Via Gravity')
 
-number_of_particles = 2
 my_particles = []
 
 for n in range(number_of_particles):
