@@ -125,6 +125,7 @@ fixed = Particle((width/2,height/2),30)
 fixed.mass = 9000
 my_particles.append(fixed)
 
+running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
