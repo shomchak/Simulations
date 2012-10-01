@@ -1,7 +1,7 @@
-# Simulates n point masses interacting with gravity. The masses, starting positions
-# and velocites are initialized to random values. The partices can pass through 
-# each other for the time being. The red and blue lines point in the direction of
-# the velocity vector and force vector, respectively. 
+# Simulates n point masses orbiting around a fixed mass at the center, interacting
+# with gravity. The positions of the masses are initialized with radial symmetry.
+# The masses can pass through each other. The red and blue lines point in the 
+# direction of the velocity vector and force vector, respectively. 
 
 
 import pygame
@@ -9,11 +9,11 @@ import random
 import math
 import pdb
 
-number_of_particles = 3
+number_of_particles = 1
 background_colour = (255,255,255)
 velo_line_colour = (255,0,0)
 force_line_colour = (100,0,255)
-(width, height) = (1000, 1000)
+(width, height) = (700, 700)
 drag = 1
 elasticity = 1
 gravity = (math.pi, 0.00)
@@ -93,39 +93,49 @@ class Particle():
             self.angle = 2*math.pi - self.angle
             self.speed *= elasticity
 
-
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('N-Bodies Interacting Via Gravity')
 
 my_particles = []
 
 for n in range(number_of_particles):
-    size = random.randint(10, 20)
-    x = random.randint(size, width-size)
-    y = random.randint(size, height-size)
+    size = 15#random.randint(10, 20)
+    # x = random.randint(size, width-size)
+    # y = random.randint(size, height-size)
 
     # x = random.randint(600,800)
     # y = random.randint(600,800)
-
-    # x = 400 + 200*(n)
-    # y = 400 + 200*n
-
+    radius = 250
+    x = width/2 + radius*math.cos(2*math.pi*n/number_of_particles)
+    y = height/2 + radius*math.sin(2*math.pi*n/number_of_particles)
     particle = Particle((x, y), size)
-    particle.speed = random.uniform(1,2)
-    particle.angle = random.uniform(0, math.pi*2)
+    particle.speed = 4
+    particle.angle = 2*math.pi*n/number_of_particles + math.pi/2
+
+    # x = 300 + 400*n
+    # y = 500
+    # particle = Particle((x, y), size)
+
+    # particle.speed = 3#random.uniform(1,2)
+    # particle.angle = -math.pi/2#random.uniform(0, math.pi*2)
 
     my_particles.append(particle)
 
-running = True
+fixed = Particle((width/2,height/2),30)
+fixed.mass = 9000
+my_particles.append(fixed)
 
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
     screen.fill(background_colour)
+    toggle = 1
     for particle in my_particles:
-        particle.display()
-        particle.move()
-        particle.bounce()
-    first = False
+        if particle != fixed:
+            particle.display()
+            particle.move()
+            particle.bounce()
+        else:
+            particle.display()
     pygame.display.flip()
