@@ -9,6 +9,7 @@ import random
 import math
 import pdb
 
+running = True
 number_of_particles = 2
 background_colour = (255,255,255)
 velo_line_colour = (255,0,0)
@@ -182,7 +183,6 @@ fixed.mass = 9000
 my_particles.append(fixed)
 
 if __name__ == "__main__":
-    running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

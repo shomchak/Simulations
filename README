@@ -1,0 +1,15 @@
+These programs simulate and draw the 2-dimensional motion of particles
+interacting via gravity. The size of the particles is proportional to their
+mass. Each particle is drawn with a red arrow indicating its velocity, and 
+a blue arrow indicating the direction of the total force acting on the particle.
+
+n-bodies.py simulates n free particles with random starting positions/velocities.
+
+fixed-body.py simulates n particles symmetrically distributed around a fixed central mass.
+
+The trajectories are propogated with a Runge-Kutta 4 integrator.
+
+To run either file, you must have pygame installed, and you must invoke a 32-bit version 
+of python, for example:
+
+prompt$ python2.7-32 n-bodies.py
